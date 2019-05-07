@@ -1,19 +1,17 @@
 package core.model;
 
-import org.openqa.selenium.chrome.ChromeDriver;
-
 public class Employee {
 
-    public String name;
-    public String secondName;
+    public String firstName;
+    public String lastName;
     public String startDate;
     public String email;
 
+    public Employee (String firstName, String lastName, String startDate, String email) {
 
-    public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "/Users/Purferno/Downloads/chromedriver_74");
-
-        ChromeDriver driver = new ChromeDriver();
-        driver.get("http://www.google.com");
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.startDate = startDate;
+        this.email = email;
     }
 }

@@ -1,5 +1,6 @@
 package pages.authorization;
 
+import core.model.Credentials;
 import core.testing.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,8 +16,11 @@ public class LoginPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Elements
+     */
     @FindBy(xpath = "//*[@ng-model='user.name']")
-    public WebElement inputEmail;
+    public WebElement inputUsername;
 
     @FindBy(xpath = "//*[@ng-model='user.password']")
     public WebElement inputPassword;
@@ -24,18 +28,23 @@ public class LoginPage extends Page {
     @FindBy(xpath = "//button[@type='submit']")
     public WebElement buttonLogin;
 
+    @FindBy(css = ".error-message")
+    public WebElement errorMessage;
 
 
-    public LoginPage inputCredentials(String email, String password) {
-        inputEmail.sendKeys(email);
-        inputPassword.sendKeys(password);
+    /**
+     * Actions
+     */
+    public LoginPage inputCredentials(Credentials credentials) {
+        inputUsername.sendKeys(credentials.username);
+        inputPassword.sendKeys(credentials.password);
         return this;
     }
 
-
-    public HomePage login(String email, String password) throws Exception {
-        inputCredentials(email, password);
+    public HomePage login(Credentials credentials) throws InterruptedException {
+        inputCredentials(credentials);
         buttonLogin.click();
+        Thread.sleep(2000);
         return new HomePage(driver);
     }
 }
